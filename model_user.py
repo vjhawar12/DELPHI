@@ -55,7 +55,13 @@ def predict(image):
 	return "fresh" if predicted_class == 0 else "rotten"
 
 
+# load model weights from hugging face
 model = CNN(2)
-model.load_state_dict(torch.load(r"/home/vedant/NavSight/model_state_dict.pth", weights_only=True))
+url = "https://huggingface.co/vjhawar12/FreshNET/resolve/main/model_state_dict.pth"
+device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
+model.to(device)
+state_dict = torch.hub.load_state_dict_from_url(url, map_location=device)
+model.load_state_dict(state_dict)
+
 
 
