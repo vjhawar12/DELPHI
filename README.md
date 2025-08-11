@@ -187,7 +187,6 @@ Source: [Raspberry Pi 5 Features](https://cdn.shopify.com/s/files/1/0254/1191/17
 - PiCAM V3 for better performance.
 
 ### Skills Learned
-- Advanced Raspberry Pi programming and GPIO use.
+- Raspberry Pi programming and GPIO use.
 - Python + shell scripting integration.
-- Building a CNN for computer vision.
 - Google Cloud Platform for storage.
