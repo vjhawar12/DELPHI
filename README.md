@@ -32,9 +32,6 @@ Within $100; no irritating flashes or sudden beeps.
 **Key Functions**  
 Identifies objects and text, attached to a belt and discreetly worn over or under a jacket.
 
-**Timeline**  
-February 10th – April 4th
-
 **Size of Team**  
 4 Engineering students
 
