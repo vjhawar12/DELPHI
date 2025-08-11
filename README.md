@@ -1,5 +1,7 @@
 # Project 3: D.E.L.P.H.I (Detecting, Examining, Locating, Hearing, and Identification)
 
+Video of final presentation: 
+
 [![Final Presentation Video](https://img.youtube.com/vi/RjQDz-6EeFI/0.jpg)](https://www.youtube.com/watch?v=RjQDz-6EeFI)
 
 ## Project Narrative
