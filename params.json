@@ -1,9 +1,0 @@
-{
-    "button_pin": 16,
-    "switch_pin": 36,
-    "img_size": 64,
-    "fc1_dim": 128,
-    "conv_layer_1_dim": 32,
-    "conv_layer_2_dim": 64,
-    "conv_layer_3_dim": 128
-}

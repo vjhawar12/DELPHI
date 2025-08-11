@@ -1,6 +1,6 @@
 from google.cloud import texttospeech
 import asyncio
-from init import tts_client
+from DELPHI.helper.utils import tts_client
 
 async def tts(text):
 	ssml = f"<speak> {text} </speak>"

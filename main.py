@@ -2,11 +2,10 @@ from picamera2 import Preview
 from google.cloud import vision
 import RPi.GPIO as gpio
 import sys
-from tts import tts
+from DELPHI.helper.tts import tts
 import asyncio
-from init import client, vision_client, tts_client
-from cloud import upload
-from camera import take_photo, identify_quality, cam
+from DELPHI.helper.utils import client, vision_client, tts_client, cam
+from DELPHI.helper.camera import take_photo
 import json
 
 with open("params.json", "r") as file:
@@ -42,38 +41,19 @@ async def analyze_image(image_url):
 				],
 			},
 		],
-		stream = False,
+		stream = True,
 	)
 
-
-	_response2 = client.chat.completions.create(
-		model="gpt-4o-mini",
-   		messages=[
-			{
-	   			"role": "user",
-				"content": [
-					{"type" : "text", "text" : "Based on the attatched image, answer the following question with one word, yes or no: Was there a food or drink item in the photo?"},
-					{ "type" : "image_url","image_url" : { "url": image_url, } }
-				]
-			},
-		], stream = False,
-	)
-
-	response, response2 = await asyncio.gather(_response, _response2)
-	# change to return if not working
-	return response.choices[0].message.content, response2.choices[0].message.content
+	await asyncio.gather(_response)
 
 
 async def button_callback(mode):
 	image_url = await take_photo()
 	if mode == "Object Recognition":
 		print("detecting image")
-		analysis, food_or_drink = await analyze_image(image_url)
+		analysis = await analyze_image(image_url)
 		await tts(analysis)
-		print(food_or_drink)
-		if 'yes' in food_or_drink.lower():
-			await tts("Since I detected a consumable in this image, I'll check if its fresh or not.")
-			await tts(identify_quality(image_url))
+
 	elif mode == "Text Recognition":
 		print("recongizing text")
 		await tts(detect_text_uri(image_url))
