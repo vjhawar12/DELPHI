@@ -1,5 +1,10 @@
 # Project 3: D.E.L.P.H.I (Detecting, Examining, Locating, Hearing, and Identification)
 
+**Tech Stack:** Raspberry Pi 4, Python, Bash, Google Vision API, OpenAI API, KiCAD, 3D Printing (Fusion 360)  
+**Role:** Electrical + Software Lead  
+**Key Results:** Built wearable object & text recognition device with Bluetooth audio output in ~4s latency; <$100 BOM; tested with >80% accuracy in bright light.
+
+
 **Video of final presentation**
 
 [![Final Presentation Video](https://img.youtube.com/vi/RjQDz-6EeFI/0.jpg)](https://www.youtube.com/watch?v=RjQDz-6EeFI)
