@@ -35,6 +35,10 @@ Identifies objects and text, attached to a belt and discreetly worn over or unde
 **Size of Team**  
 4 Engineering students
 
+**Timeline**
+
+February 10th - April 4th
+
 ---
 
 ## Personal Contributions
