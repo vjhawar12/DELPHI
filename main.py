@@ -8,19 +8,24 @@ from DELPHI.helper.utils import client, vision_client, tts_client, cam
 from DELPHI.helper.camera import take_photo
 import json
 
+# JSON file for variables
 with open("params.json", "r") as file:
 	params = json.load(file)
 
 button_pin = params["button_pin"]
 switch_pin = params["switch_pin"]
 
+# Obj recognition mode by default
 mode = "Object Recognition"
 gpio.setmode(gpio.BOARD)
 gpio.setup(button_pin, gpio.IN)
-gpio.setup(switch_pin, gpio.IN, pull_up_down=gpio.PUD_UP)
 
+# pull up resistor to ensure no floating states
+gpio.setup(switch_pin, gpio.IN, pull_up_down=gpio.PUD_UP) 
+
+""" Accepts an image url (from cloud) and uses the Google Vision API to detect text """
 def detect_text_uri(uri):
-	image = vision.Image()
+	image = vision.Image() 
 	image.source.image_uri = uri
 	response = vision_client.text_detection(image=image)
 	texts = response.text_annotations
@@ -28,10 +33,11 @@ def detect_text_uri(uri):
 	if texts:
 		print(texts[0].description)
 		return texts[0].description
-
+	
+""" Accepts an image url (from cloud) and uses the OpenAI API to detect objects in the image """
 async def analyze_image(image_url):
 	_response = client.chat.completions.create(
-		model="gpt-4o-mini",
+		model="gpt-4o-mini", # a lightweight model that performs quite well at image recognition
    		messages=[
 			{
 	   			"role": "user",
@@ -41,12 +47,12 @@ async def analyze_image(image_url):
 				],
 			},
 		],
-		stream = True,
+		stream = True, # stream mode leads to lower latency (~3 seconds) between button press and hearing the first word   
 	)
 
 	await asyncio.gather(_response)
 
-
+""" On button press run either object detection or text recognition mode depending on the switch value """
 async def button_callback(mode):
 	image_url = await take_photo()
 	if mode == "Object Recognition":
@@ -60,23 +66,21 @@ async def button_callback(mode):
 	else:
 		raise ValueError(f"Invalid mode '{mode}'")
 
-async def load_ml():
-	asyncio.create_task(tts('Loading ML model. Do not press the button right now.'))
-	process = await asyncio.create_subprocess_exec("python", "/home/vedant/NavSight/model_user.py")
-	await process.wait()
-
+""" Main method. Called once pi is booted up. """
 async def run():
+	# warming up asyncio with a dummy task slightly improved performance
 	warmup = asyncio.create_task(tts(" "))
-
-	await load_ml()
+	
 	await tts('Object recognition mode on.')
 	await tts('Camera enabled. Press the button anytime.')
-
+	
+	# configuring camera
 	cam.start_preview(Preview.NULL)
 	preview_config = cam.create_preview_configuration(main={"size": (800, 600)})
 	cam.configure(preview_config)
 	cam.start()
-
+	
+	# button press logic
 	try:
 		while True:
 			if gpio.input(switch_pin) == 1:
@@ -88,9 +92,9 @@ async def run():
 				await tts(f'Press detected. Active mode {mode} I\'m taking a look')
 				await button_callback(mode)
 			await asyncio.sleep(0.2)
-	except KeyboardInterrupt:
+	except KeyboardInterrupt: # for testing only
 		await tts("Terminating program")
-	finally:
+	finally: # cleaning up resources
 		cam.stop()
 		cam.close()
 		gpio.cleanup()

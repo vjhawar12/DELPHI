@@ -2,8 +2,9 @@ from google.cloud import texttospeech
 import asyncio
 from DELPHI.helper.utils import tts_client
 
+""" Text-to-speech function using Google's texttospeech API"""
 async def tts(text):
-	ssml = f"<speak> {text} </speak>"
+	ssml = f"<speak> {text} </speak>" # these tokens indicate the beginning and end of spoken sentence
 
 	input_text = texttospeech.SynthesisInput(ssml=ssml)
 
@@ -23,7 +24,7 @@ async def tts(text):
 
 	player = await asyncio.create_subprocess_exec(
 		"mpg321", "-",
-		stdin=asyncio.subprocess.PIPE,
+		stdin=asyncio.subprocess.PIPE, # pipping to STDIN avoids having to store audio on disk before playing it
 		stdout=asyncio.subprocess.DEVNULL,
 		stderr=asyncio.subprocess.DEVNULL
 	)

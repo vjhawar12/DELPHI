@@ -4,7 +4,9 @@ import os
 from google.oauth2 import service_account
 from picamera2 import Picamera2
 
-cam = Picamera2()
+""" This file just initializes resources used elsewhere """
+
+cam = Picamera2() 
 
 client = AsyncOpenAI(api_key=os.getenv("OPEN_AI_API_KEY"))
 

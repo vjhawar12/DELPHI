@@ -3,6 +3,7 @@ import aiohttp
 from gcloud.aio.storage import Storage
 import os
 
+""" Upload function to upload an image to a Google Cloud Storage bucket """
 async def upload(bucket_name, blob_name, path_to_file):
 	async with aiohttp.ClientSession() as session:
 		storage_client = Storage(service_file=os.getenv("GCS_KEY"), session=session)
