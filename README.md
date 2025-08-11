@@ -1,5 +1,7 @@
 # Project 3: D.E.L.P.H.I (Detecting, Examining, Locating, Hearing, and Identification)
 
+[![Final Presentation Video](https://img.youtube.com/vi/RjQDz-6EeFI/0.jpg)](https://www.youtube.com/watch?v=RjQDz-6EeFI)
+
 ## Project Narrative
 
 ---
@@ -157,7 +159,6 @@ Source: [Raspberry Pi 5 Features](https://cdn.shopify.com/s/files/1/0254/1191/17
 - Voice quality survey:  
 ![Voice quality survey](./images/image%2023.png) – Avg. 4.83/5  
 
-[Video of Final Presentation](https://www.youtube.com/watch?v=RjQDz-6EeFI)
 
 ---
 
