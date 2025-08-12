@@ -1,4 +1,4 @@
-# Project 3: D.E.L.P.H.I. — Deep Embedded Learning for Perception, Hearing, and Identification ​
+# D.E.L.P.H.I. — Deep Embedded Learning for Perception, Hearing, and Identification ​
 
 **Tech Stack:** Raspberry Pi 4, Python, Bash, Google Vision API, OpenAI API, KiCAD, 3D Printing (Autodesk Inventor)  
 **Role:** Electrical + Software Lead  
