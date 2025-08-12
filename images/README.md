@@ -1,4 +1,4 @@
-# Project 3: D.E.L.P.H.I (Detecting, Examining, Locating, Hearing, and Identification)
+# Project 3: D.E.L.P.H.I — Deep Embedded Learning for Perception, Hearing, and Identification ​
 
 ## Project Narrative
 
